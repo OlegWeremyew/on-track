@@ -1,4 +1,14 @@
 <script setup>
+import BaseSelect from "@/components/common/BaseSelect/BaseSelect.vue";
+
+const OPTIONS = [
+  {value: 1, label: 'Coding',},
+  {value: 2, label: 'Reading',},
+  {value: 3, label: 'Training',},
+]
+
+const selectedActivityId = 2
+
 const props = defineProps(['timelineItem'])
 
 const hourLinkClasses = [
@@ -14,5 +24,10 @@ const hourLinkClasses = [
     <a href="#" :class="hourLinkClasses">
       {{ timelineItem.hour }}: 00
     </a>
+    <BaseSelect
+        :options="OPTIONS"
+        placeholder="Rest"
+        :selected="selectedActivityId"
+    />
   </li>
 </template>
