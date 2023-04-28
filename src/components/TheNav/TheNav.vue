@@ -4,9 +4,12 @@ import {NAV_ITEMS} from "@/constans";
 
 defineProps({
   currentPage: {
-    type: String,
     required: true,
-  },
+    type: String,
+    validator(currentPage) {
+      return Object.keys(NAV_ITEMS).includes(currentPage)
+    }
+  }
 })
 
 const emit = defineEmits(['navigate'])

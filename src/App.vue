@@ -30,5 +30,8 @@ const goTo = (page) => {
     <TheProgress v-show="currentPage === PAGE_PROGRESS"/>
   </main>
 
-  <TheNav :current-page="currentPage" @navigate="goTo($event)"/>
+  <TheNav
+      :current-page="currentPage"
+      @navigate="goTo($event)"
+  />
 </template>
