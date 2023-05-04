@@ -28,6 +28,10 @@ export const validateSelectOptions = (options) => {
   return options.every(isSelectOptionsValid)
 }
 
+export const isHourValid = (hour) => {
+  return isNumber(hour) && isBetween(hour, MIDNIGHT_HOUR, HOURS_IN_DAY)
+}
+
 const isNull = (value) => {
   return value === null
 }
@@ -46,8 +50,4 @@ const isBetween = (value, start, end) => {
 
 const isString = (value) => {
   return typeof value === 'string'
-}
-
-const isHourValid = (hour) => {
-  return isNumber(hour) && isBetween(hour, MIDNIGHT_HOUR, HOURS_IN_DAY)
 }
