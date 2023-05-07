@@ -32,6 +32,14 @@ export const isHourValid = (hour) => {
   return isNumber(hour) && isBetween(hour, MIDNIGHT_HOUR, HOURS_IN_DAY)
 }
 
+export const validateActivities = (activities) => {
+  return activities.every(isActivityValid)
+}
+
+export const isActivityValid = (activity) => {
+  return isNotEmptyString(activity)
+}
+
 const isNull = (value) => {
   return value === null
 }
@@ -50,4 +58,8 @@ const isBetween = (value, start, end) => {
 
 const isString = (value) => {
   return typeof value === 'string'
+}
+
+const isNotEmptyString = (value) => {
+  return isString(value) && value.length > 0
 }
