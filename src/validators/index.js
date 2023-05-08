@@ -1,4 +1,4 @@
-import { HOURS_IN_DAY, MIDNIGHT_HOUR, NAV_ITEMS } from '@/constans'
+import { BUTTON_TYPES, HOURS_IN_DAY, MIDNIGHT_HOUR, NAV_ITEMS } from '@/constans'
 
 export const isPageValid = (page) => {
   return Object.keys(NAV_ITEMS).includes(page)
@@ -38,6 +38,10 @@ export const validateActivities = (activities) => {
 
 export const isActivityValid = (activity) => {
   return isNotEmptyString(activity)
+}
+
+export const isButtonTypeValid = (type) => {
+  return BUTTON_TYPES.includes(type)
 }
 
 const isNull = (value) => {
