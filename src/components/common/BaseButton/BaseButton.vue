@@ -1,14 +1,5 @@
-<script setup>
+<script>
 import { BUTTON_TYPE_DANGER, BUTTON_TYPE_NEUTRAL } from '@/constans'
-import { isButtonTypeValid } from '@/validators'
-
-defineProps({
-  type: {
-    type: String,
-    default: BUTTON_TYPE_NEUTRAL,
-    validator: isButtonTypeValid,
-  }
-})
 
 const typeClasses = {
   [BUTTON_TYPE_NEUTRAL]: 'bg-gray-100 enabled:hover:bg-gray-200',
@@ -16,10 +7,22 @@ const typeClasses = {
 }
 </script>
 
+<script setup>
+import { isButtonTypeValid } from '@/validators'
+
+defineProps({
+  type: {
+    type: String,
+    default: BUTTON_TYPE_NEUTRAL,
+    validator: isButtonTypeValid,
+  },
+})
+</script>
+
 <template>
   <button
     type='button'
-    :class="`${typeClasses[type]} rounded  p-3 disabled:cursor-not-allowed disabled:opacity-50`"
+    :class='`${typeClasses[type]} rounded  p-3 disabled:cursor-not-allowed disabled:opacity-50`'
   >
     <slot />
   </button>

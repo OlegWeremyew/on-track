@@ -5,7 +5,7 @@ export const isPageValid = (page) => {
 }
 
 const isSelectOptionsValid = ({ value, label }) => {
-  return isNumber(value) && isString(label)
+  return isNumber(value) && isNotEmptyString(label)
 }
 
 export const isUndefinedOrNull = (select) => {
