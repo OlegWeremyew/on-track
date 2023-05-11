@@ -44,12 +44,12 @@ export const isButtonTypeValid = (type) => {
   return BUTTON_TYPES.includes(type)
 }
 
-const isNull = (value) => {
-  return value === null
+export const isUndefined = (value) => {
+  return value === undefined
 }
 
-const isUndefined = (value) => {
-  return value === undefined
+const isNull = (value) => {
+  return value === null
 }
 
 const isNumber = (value) => {
