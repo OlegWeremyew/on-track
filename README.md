@@ -23,3 +23,5 @@ npm run build
 ```sh
 npm run lint
 ```
+
+##### Here will be future project description
