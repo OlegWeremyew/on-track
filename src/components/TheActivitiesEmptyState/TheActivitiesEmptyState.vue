@@ -1,0 +1,6 @@
+<template>
+  <div class='flex flex-col items-center gap-4 p-8 text-center grow'>
+    <img src="@/assets/images/no_activities.svg" alt='No activities' title class='h-48'>
+    <span class='text-gray-400'>You don't have any activities</span>
+  </div>
+</template>
