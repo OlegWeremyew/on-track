@@ -1,6 +1,6 @@
 export const generateActivitiesSelectOptions = (activities) => {
-  return activities.map((label, value) => ({
-    label,
-    value,
+  return activities.map((activity) => ({
+    label: activity.name,
+    value: activity.id,
   }))
 }

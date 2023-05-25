@@ -9,10 +9,12 @@ import { PAGE_ACTIVITIES, PAGE_PROGRESS, PAGE_TIMELINE } from '@/constans'
 import { normalizePageHash } from '@/utils/normalizePageHash'
 import { generateTimelineItems } from '@/utils/generateTimelineItems'
 import { generateActivitiesSelectOptions } from '@/utils/generateActivitiesSelectOptions'
+import { generateActivities } from '@/utils/generateActivities'
+import { generateId } from '@/utils/generateId'
 
 const currentPage = ref(normalizePageHash())
 const timelineItems = generateTimelineItems()
-const activities = ref(['Coding', 'Reading', 'Training'])
+const activities = ref(generateActivities())
 const activitySelectOptions = generateActivitiesSelectOptions(activities.value)
 
 const goTo = (page) => {
@@ -23,8 +25,12 @@ const deleteActivity = (activity) => {
   activities.value.splice(activities.value.indexOf(activity), 1)
 }
 
-function createActivity(activity) {
-  activities.value.push(activity)
+function createActivity(name) {
+  activities.value.push({
+    id: generateId(),
+    name,
+    secondsToComplete: 0,
+  })
 }
 
 </script>
@@ -42,7 +48,7 @@ function createActivity(activity) {
       v-show='currentPage === PAGE_ACTIVITIES'
       :activities='activities'
       @delete-activity='deleteActivity'
-      @create-activity="createActivity"
+      @create-activity='createActivity'
     />
     <TheProgress v-show='currentPage === PAGE_PROGRESS' />
   </main>
