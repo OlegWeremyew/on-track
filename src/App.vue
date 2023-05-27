@@ -10,7 +10,6 @@ import { normalizePageHash } from '@/utils/normalizePageHash'
 import { generateTimelineItems } from '@/utils/generateTimelineItems'
 import { generateActivitiesSelectOptions } from '@/utils/generateActivitiesSelectOptions'
 import { generateActivities } from '@/utils/generateActivities'
-import { generateId } from '@/utils/generateId'
 
 const currentPage = ref(normalizePageHash())
 const timelineItems = generateTimelineItems()
@@ -25,12 +24,8 @@ const deleteActivity = (activity) => {
   activities.value.splice(activities.value.indexOf(activity), 1)
 }
 
-function createActivity(name) {
-  activities.value.push({
-    id: generateId(),
-    name,
-    secondsToComplete: 0,
-  })
+function createActivity(activity) {
+  activities.value.push(activity)
 }
 
 </script>

@@ -3,6 +3,7 @@ import BaseButton from '@/components/common/BaseButton/BaseButton.vue'
 import { PlusIcon } from '@heroicons/vue/24/outline'
 import { isActivityValid } from '@/validators'
 import { nextTick, ref } from 'vue'
+import { generateId } from '@/utils/generateId'
 
 const emit = defineEmits({
   submit: isActivityValid,
@@ -11,7 +12,11 @@ const emit = defineEmits({
 const activity = ref('')
 
 const submit = async () => {
-  emit('submit', activity.value)
+  emit('submit', {
+    id: generateId(),
+    name: activity.value,
+    secondsToComplete: 0,
+  })
 
   activity.value = ''
 

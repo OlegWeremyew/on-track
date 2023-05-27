@@ -5,7 +5,7 @@ export const isPageValid = (page) => {
 }
 
 const isSelectOptionsValid = ({ value, label }) => {
-  return isNumber(value) && isNotEmptyString(label)
+  return (isNumber(value) || isNotEmptyString(value)) && isNotEmptyString(label)
 }
 
 export const isUndefinedOrNull = (select) => {
@@ -36,8 +36,13 @@ export const validateActivities = (activities) => {
   return activities.every(isActivityValid)
 }
 
-export const isActivityValid = (activity) => {
-  return isNotEmptyString(activity)
+export const isActivityValid = ({ id, name, secondsToComplete }) => {
+  return [
+    isNotEmptyString(id),
+    isNotEmptyString(name),
+    isNumber(secondsToComplete),
+  ]
+    .every(Boolean)
 }
 
 export const isButtonTypeValid = (type) => {
