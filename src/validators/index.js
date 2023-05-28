@@ -53,7 +53,7 @@ export const isUndefined = (value) => {
   return value === undefined
 }
 
-const isNull = (value) => {
+export const isNull = (value) => {
   return value === null
 }
 
@@ -71,4 +71,8 @@ const isString = (value) => {
 
 const isNotEmptyString = (value) => {
   return isString(value) && value.length > 0
+}
+
+export const isSelectValueValid = (value) => {
+  return isNumberOrNull(value) || isNotEmptyString(value)
 }

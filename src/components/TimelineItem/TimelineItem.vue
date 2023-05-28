@@ -4,7 +4,7 @@ import { isTimelineItemValid, validateSelectOptions } from '@/validators'
 import { ref } from 'vue'
 import TimelineHour from '@/components/TimelineItem/TimelineHour/TimelineHour.vue'
 
-const selectedActivityId = ref(0)
+const selectedActivityId = ref(null)
 
 defineProps({
   timelineItem: {
