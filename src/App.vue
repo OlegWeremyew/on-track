@@ -21,6 +21,12 @@ const goTo = (page) => {
 }
 
 const deleteActivity = (activity) => {
+  timelineItems.forEach((timelineItem) => {
+    if (timelineItem.activityId === activity.id) {
+      timelineItem.activityId = null
+    }
+  })
+
   activities.value.splice(activities.value.indexOf(activity), 1)
 }
 
@@ -28,7 +34,7 @@ function createActivity(activity) {
   activities.value.push(activity)
 }
 
-function setTimeLineItemActivity({ timelineItem, activity }) {
+function setTimelineItemActivity({ timelineItem, activity }) {
   timelineItem.activityId = activity.id
 }
 
@@ -43,7 +49,7 @@ function setTimeLineItemActivity({ timelineItem, activity }) {
       :timeline-items='timelineItems'
       :activities='activities'
       :activity-select-options='activitySelectOptions'
-      :set-time-line-item-activity='setTimeLineItemActivity'
+      @set-timeline-item-activity="setTimelineItemActivity"
     />
     <TheActivities
       v-show='currentPage === PAGE_ACTIVITIES'

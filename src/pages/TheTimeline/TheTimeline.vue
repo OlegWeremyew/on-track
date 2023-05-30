@@ -10,29 +10,26 @@ import {
 
 defineProps({
   timelineItems: {
-    type: Array,
     required: true,
-    validator: validateTimelineItems,
-  },
-  activitySelectOptions: {
     type: Array,
-    required: true,
-    validator: validateSelectOptions,
+    validator: validateTimelineItems
   },
   activities: {
-    type: Array,
     required: true,
-    validator: validateActivities,
+    type: Array,
+    validator: validateActivities
   },
+  activitySelectOptions: {
+    required: true,
+    type: Array,
+    validator: validateSelectOptions
+  }
 })
 
 const emit = defineEmits({
-  setTimeLineItemActivity({ timelineItem, activity }) {
-    return [
-      isTimelineItemValid(timelineItem),
-      isActivityValid(activity),
-    ].every(Boolean)
-  },
+  setTimelineItemActivity({ timelineItem, activity }) {
+    return [isTimelineItemValid(timelineItem), isActivityValid(activity)].every(Boolean)
+  }
 })
 </script>
 
@@ -45,7 +42,7 @@ const emit = defineEmits({
         :timeline-item='timelineItem'
         :activities='activities'
         :activity-select-options='activitySelectOptions'
-        @select-activity="emit('setTimeLineItemActivity', {timelineItem, activity: $event} )"
+        @select-activity="emit('setTimelineItemActivity', {timelineItem, activity: $event} )"
       />
     </ul>
   </div>
