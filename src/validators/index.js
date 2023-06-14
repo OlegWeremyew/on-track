@@ -57,7 +57,7 @@ export const isNull = (value) => {
   return value === null
 }
 
-const isNumber = (value) => {
+export const isNumber = (value) => {
   return typeof value === 'number'
 }
 

@@ -1,6 +1,6 @@
 <script setup>
 import BaseSelect from '@/components/common/BaseSelect/BaseSelect.vue'
-import { isActivityValid, isTimelineItemValid, validateActivities, validateSelectOptions } from '@/validators'
+import { isActivityValid, isNull, isTimelineItemValid, validateActivities, validateSelectOptions } from '@/validators'
 import TimelineHour from '@/components/TimelineItem/TimelineHour/TimelineHour.vue'
 
 const props = defineProps({
@@ -22,11 +22,16 @@ const props = defineProps({
 })
 
 const emit = defineEmits({
-  selectActivity: isActivityValid,
+  selectActivity(activity) {
+    return isNull(activity) || isActivityValid
+  },
 })
 
 const selectActivity = (id) => {
-  emit('selectActivity', props.activities.find((activity) => activity.id === id))
+  emit(
+    'selectActivity',
+    props.activities.find((activity) => activity.id === id) || null,
+  )
 }
 
 </script>

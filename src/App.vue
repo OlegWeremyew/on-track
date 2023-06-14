@@ -12,7 +12,7 @@ import { generateActivitiesSelectOptions } from '@/utils/generateActivitiesSelec
 import { generateActivities } from '@/utils/generateActivities'
 
 const currentPage = ref(normalizePageHash())
-const timelineItems = generateTimelineItems()
+const timelineItems = ref(generateTimelineItems())
 const activities = ref(generateActivities())
 const activitySelectOptions = computed(() => generateActivitiesSelectOptions(activities.value))
 
@@ -21,7 +21,7 @@ const goTo = (page) => {
 }
 
 const deleteActivity = (activity) => {
-  timelineItems.forEach((timelineItem) => {
+  timelineItems.value.forEach((timelineItem) => {
     if (timelineItem.activityId === activity.id) {
       timelineItem.activityId = null
     }
@@ -35,7 +35,11 @@ function createActivity(activity) {
 }
 
 function setTimelineItemActivity({ timelineItem, activity }) {
-  timelineItem.activityId = activity.id
+  timelineItem.activityId = activity?.id || null
+}
+
+function setActivitySecondsToComplete(activity, secondsToComplete) {
+  activity.secondsToComplete = secondsToComplete
 }
 
 </script>
@@ -49,13 +53,14 @@ function setTimelineItemActivity({ timelineItem, activity }) {
       :timeline-items='timelineItems'
       :activities='activities'
       :activity-select-options='activitySelectOptions'
-      @set-timeline-item-activity="setTimelineItemActivity"
+      @set-timeline-item-activity='setTimelineItemActivity'
     />
     <TheActivities
       v-show='currentPage === PAGE_ACTIVITIES'
       :activities='activities'
       @delete-activity='deleteActivity'
       @create-activity='createActivity'
+      @set-activity-seconds-to-complete='setActivitySecondsToComplete'
     />
     <TheProgress v-show='currentPage === PAGE_PROGRESS' />
   </main>

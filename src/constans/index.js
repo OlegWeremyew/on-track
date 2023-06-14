@@ -10,18 +10,21 @@ export const NAV_ITEMS = {
   [PAGE_PROGRESS]: ChartBarIcon
 };
 
+
+export const SECONDS_IN_HOUR = 3600;
+
 export const PERIOD_SELECT_OPTIONS = [
   {
-    value: 15 * 60,
-    label: '0:15',
+    value: SECONDS_IN_HOUR,
+    label: '01:00',
   },
   {
-    value: 30 * 60,
-    label: '0:30',
+    value: 2 * SECONDS_IN_HOUR,
+    label: '02:00',
   },
   {
-    value: 45 * 60,
-    label: '0:45',
+    value: 3 * SECONDS_IN_HOUR,
+    label: '03:00',
   },
 ];
 
@@ -32,5 +35,3 @@ export const BUTTON_TYPE_DANGER = 'danger';
 export const BUTTON_TYPE_NEUTRAL = 'neutral';
 export const BUTTON_TYPE_PRIMARY = 'primary';
 export const BUTTON_TYPES = [BUTTON_TYPE_DANGER, BUTTON_TYPE_NEUTRAL, BUTTON_TYPE_PRIMARY];
-
-export const SECONDS_IN_HOUR = 3600;
