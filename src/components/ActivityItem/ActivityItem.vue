@@ -2,7 +2,7 @@
 import { TrashIcon } from '@heroicons/vue/24/outline'
 import BaseButton from '@/components/common/BaseButton/BaseButton.vue'
 import BaseSelect from '@/components/common/BaseSelect/BaseSelect.vue'
-import { PERIOD_SELECT_OPTIONS, BUTTON_TYPE_DANGER } from '@/constans'
+import { PERIOD_SELECT_OPTIONS, BUTTON_TYPE_DANGER } from '@/constants'
 import { isActivityValid, isUndefined, isNumber } from '@/validators'
 
 defineProps({
@@ -30,7 +30,7 @@ const emit = defineEmits({
     <div>
       <BaseSelect
         class='font-mono'
-        placeholder='h:mm'
+        placeholder='hh:mm'
         :options='PERIOD_SELECT_OPTIONS'
         :selected='activity.secondsToComplete || null'
         @select="emit('setSecondsToComplete', $event || 0)"

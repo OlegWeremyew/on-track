@@ -1,7 +1,9 @@
 <script setup>
 import BaseSelect from '@/components/common/BaseSelect/BaseSelect.vue'
-import { isActivityValid, isNull, isTimelineItemValid, validateActivities, validateSelectOptions } from '@/validators'
+import { isActivityValid, isTimelineItemValid, validateActivities, validateSelectOptions } from '@/validators'
 import TimelineHour from '@/components/TimelineItem/TimelineHour/TimelineHour.vue'
+import { NULLABLE_ACTIVITY } from '@/constants'
+import TimelineStopwatch from '@/components/TimelineStopwatch/TimelineStopwatch.vue'
 
 const props = defineProps({
   timelineItem: {
@@ -22,18 +24,19 @@ const props = defineProps({
 })
 
 const emit = defineEmits({
-  selectActivity(activity) {
-    return isNull(activity) || isActivityValid
-  },
+  selectActivity: isActivityValid,
 })
+
+const findActivityById = (id) => {
+  return props.activities.find((activity) => activity.id === id) || NULLABLE_ACTIVITY
+}
 
 const selectActivity = (id) => {
   emit(
     'selectActivity',
-    props.activities.find((activity) => activity.id === id) || null,
+    findActivityById(id),
   )
 }
-
 </script>
 
 <template>
@@ -45,5 +48,6 @@ const selectActivity = (id) => {
       :selected='timelineItem.activityId'
       @select='selectActivity'
     />
+    <TimelineStopwatch :seconds="timelineItem.activitySeconds"/>
   </li>
 </template>

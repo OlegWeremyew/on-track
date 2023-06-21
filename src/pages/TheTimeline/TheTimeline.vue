@@ -1,7 +1,7 @@
 <script setup>
 import TimelineItem from '@/components/TimelineItem/TimelineItem.vue'
 import {
-  isActivityValid, isNull,
+  isActivityValid,
   isTimelineItemValid,
   validateActivities,
   validateSelectOptions,
@@ -12,24 +12,24 @@ defineProps({
   timelineItems: {
     required: true,
     type: Array,
-    validator: validateTimelineItems
+    validator: validateTimelineItems,
   },
   activities: {
     required: true,
     type: Array,
-    validator: validateActivities
+    validator: validateActivities,
   },
   activitySelectOptions: {
     required: true,
     type: Array,
-    validator: validateSelectOptions
-  }
+    validator: validateSelectOptions,
+  },
 })
 
 const emit = defineEmits({
-  setTimelineItemActivity({ timelineItem, activity }) {
-    return [isTimelineItemValid(timelineItem), isNull(activity) || isActivityValid(activity)].every(Boolean)
-  }
+  setTimelineItemActivity(timelineItem, activity) {
+    return [isTimelineItemValid(timelineItem), isActivityValid(activity)].every(Boolean)
+  },
 })
 </script>
 
@@ -42,7 +42,7 @@ const emit = defineEmits({
         :timeline-item='timelineItem'
         :activities='activities'
         :activity-select-options='activitySelectOptions'
-        @select-activity="emit('setTimelineItemActivity', {timelineItem, activity: $event} )"
+        @select-activity="emit('setTimelineItemActivity', timelineItem, $event)"
       />
     </ul>
   </div>

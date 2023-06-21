@@ -1,4 +1,4 @@
-import { SECONDS_IN_HOUR } from '@/constans'
+import { SECONDS_IN_HOUR } from '@/constants'
 import { generateId } from '@/utils/generateId'
 
 export const generateActivities = () => {

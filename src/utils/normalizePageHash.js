@@ -1,4 +1,4 @@
- import {PAGE_TIMELINE} from "@/constans";
+ import {PAGE_TIMELINE} from "@/constants";
  import {isPageValid} from "@/validators";
 
 export function normalizePageHash() {

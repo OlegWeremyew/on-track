@@ -5,15 +5,15 @@ import TheTimeline from '@/pages/TheTimeline/TheTimeline.vue'
 import TheActivities from '@/pages/TheActivities/TheActivities.vue'
 import TheProgress from '@/pages/TheProgress/TheProgress.vue'
 import { computed, ref } from 'vue'
-import { PAGE_ACTIVITIES, PAGE_PROGRESS, PAGE_TIMELINE } from '@/constans'
+import { PAGE_ACTIVITIES, PAGE_PROGRESS, PAGE_TIMELINE } from '@/constants'
 import { normalizePageHash } from '@/utils/normalizePageHash'
 import { generateTimelineItems } from '@/utils/generateTimelineItems'
 import { generateActivitiesSelectOptions } from '@/utils/generateActivitiesSelectOptions'
 import { generateActivities } from '@/utils/generateActivities'
 
 const currentPage = ref(normalizePageHash())
-const timelineItems = ref(generateTimelineItems())
 const activities = ref(generateActivities())
+const timelineItems = ref(generateTimelineItems(activities))
 const activitySelectOptions = computed(() => generateActivitiesSelectOptions(activities.value))
 
 const goTo = (page) => {
@@ -24,6 +24,7 @@ const deleteActivity = (activity) => {
   timelineItems.value.forEach((timelineItem) => {
     if (timelineItem.activityId === activity.id) {
       timelineItem.activityId = null
+      timelineItem.activitySeconds = 0
     }
   })
 
@@ -34,8 +35,8 @@ function createActivity(activity) {
   activities.value.push(activity)
 }
 
-function setTimelineItemActivity({ timelineItem, activity }) {
-  timelineItem.activityId = activity?.id || null
+function setTimelineItemActivity(timelineItem, activity) {
+  timelineItem.activityId = activity?.id
 }
 
 function setActivitySecondsToComplete(activity, secondsToComplete) {

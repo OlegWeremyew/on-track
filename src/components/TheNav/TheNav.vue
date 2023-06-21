@@ -1,6 +1,6 @@
 <script setup>
 import NavItem from "@/components/TheNav/NavItem/NavItem.vue";
-import {NAV_ITEMS} from "@/constans";
+import {NAV_ITEMS} from "@/constants";
 import {isPageValid} from "@/validators";
 
 defineProps({

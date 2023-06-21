@@ -1,5 +1,5 @@
 <script setup>
-import {PAGE_TIMELINE} from '@/constans'
+import {PAGE_TIMELINE} from '@/constants'
 </script>
 
 <template>
