@@ -1,6 +1,12 @@
 <script setup>
 import BaseSelect from '@/components/common/BaseSelect/BaseSelect.vue'
-import { isActivityValid, isTimelineItemValid, validateActivities, validateSelectOptions } from '@/validators'
+import {
+  isActivityValid,
+  isHourValid,
+  isTimelineItemValid,
+  validateActivities,
+  validateSelectOptions,
+} from '@/validators'
 import TimelineHour from '@/components/TimelineItem/TimelineHour/TimelineHour.vue'
 import { NULLABLE_ACTIVITY } from '@/constants'
 import TimelineStopwatch from '@/components/TimelineStopwatch/TimelineStopwatch.vue'
@@ -25,6 +31,7 @@ const props = defineProps({
 
 const emit = defineEmits({
   selectActivity: isActivityValid,
+  scrollToHour: isHourValid,
 })
 
 const findActivityById = (id) => {
@@ -41,13 +48,19 @@ const selectActivity = (id) => {
 
 <template>
   <li class='relative flex flex-col border-t border-gray-200 py-10 px-4'>
-    <TimelineHour :hour='timelineItem.hour' />
+    <TimelineHour
+      :hour='timelineItem.hour'
+      @click.prevent="emit('scrollToHour', timelineItem.hour)"
+    />
     <BaseSelect
       placeholder='Rest'
       :options='activitySelectOptions'
       :selected='timelineItem.activityId'
       @select='selectActivity'
     />
-    <TimelineStopwatch :seconds="timelineItem.activitySeconds"/>
+    <TimelineStopwatch
+      :seconds='timelineItem.activitySeconds'
+      :hour='timelineItem.hour'
+    />
   </li>
 </template>
