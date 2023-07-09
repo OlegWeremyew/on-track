@@ -4,7 +4,7 @@ import TheNav from '@/components/TheNav/TheNav.vue'
 import TheTimeline from '@/pages/TheTimeline/TheTimeline.vue'
 import TheActivities from '@/pages/TheActivities/TheActivities.vue'
 import TheProgress from '@/pages/TheProgress/TheProgress.vue'
-import { computed, ref } from 'vue'
+import { computed, provide, ref } from 'vue'
 import { PAGE_ACTIVITIES, PAGE_PROGRESS, PAGE_TIMELINE } from '@/constants'
 import { normalizePageHash } from '@/utils/normalizePageHash'
 import { generateTimelineItems } from '@/utils/generateTimelineItems'
@@ -49,10 +49,16 @@ function setTimelineItemActivity(timelineItem, activity) {
   timelineItem.activityId = activity?.id
 }
 
+function updateTimelineItemActivitySeconds(timelineItem, activitySeconds) {
+  timelineItem.activitySeconds += activitySeconds
+}
+
 function setActivitySecondsToComplete(activity, secondsToComplete) {
   activity.secondsToComplete = secondsToComplete
 }
 
+provide('updateTimelineItemActivitySeconds', updateTimelineItemActivitySeconds)
+provide('timelineItems', timelineItems.value)
 </script>
 
 <template>
@@ -71,7 +77,6 @@ function setActivitySecondsToComplete(activity, secondsToComplete) {
     <TheActivities
       v-show='currentPage === PAGE_ACTIVITIES'
       :activities='activities'
-      :timeline-items='timelineItems'
       @delete-activity='deleteActivity'
       @create-activity='createActivity'
       @set-activity-seconds-to-complete='setActivitySecondsToComplete'

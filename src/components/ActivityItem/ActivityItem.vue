@@ -3,7 +3,7 @@ import { TrashIcon } from '@heroicons/vue/24/outline'
 import BaseButton from '@/components/common/BaseButton/BaseButton.vue'
 import BaseSelect from '@/components/common/BaseSelect/BaseSelect.vue'
 import { PERIOD_SELECT_OPTIONS, BUTTON_TYPE_DANGER } from '@/constants'
-import { isActivityValid, isUndefined, isNumber, validateTimelineItems } from '@/validators'
+import { isActivityValid, isUndefined, isNumber } from '@/validators'
 import ActivitySecondsToComplete
   from '@/components/ActivityItem/ActivitySecondsToComplete/ActivitySecondsToComplete.vue'
 
@@ -12,11 +12,6 @@ defineProps({
     type: Object,
     required: true,
     validator: isActivityValid,
-  },
-  timelineItems: {
-    required: true,
-    type: Array,
-    validator: validateTimelineItems,
   },
 })
 
@@ -45,7 +40,6 @@ const emit = defineEmits({
       <ActivitySecondsToComplete
         v-if='activity.secondsToComplete'
         :activity='activity'
-        :timeline-items='timelineItems'
       />
     </div>
   </li>

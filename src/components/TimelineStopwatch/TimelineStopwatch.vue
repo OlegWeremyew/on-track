@@ -6,31 +6,30 @@ import {
   BUTTON_TYPE_SUCCESS,
   BUTTON_TYPE_WARNING, MILLISECONDS_IN_SECONDS,
 } from '@/constants'
-import { isHourValid, isNumber } from '@/validators'
+import { isTimelineItemValid } from '@/validators'
 import { formatSeconds } from '@/utils/formatSeconds'
-import { ref } from 'vue'
+import { ref, inject } from 'vue'
+
+const updateTimelineItemActivitySeconds = inject('updateTimelineItemActivitySeconds')
 
 const props = defineProps({
-    seconds: {
-      type: Number,
-      default: 0,
-      validator: isNumber,
-    },
-    hour: {
-      type: Number,
+    timelineItem: {
+      type: Object,
       required: true,
-      validator: isHourValid,
+      validator: isTimelineItemValid,
     },
   },
 )
 
-const seconds = ref(props.seconds)
+const seconds = ref(props.timelineItem.activitySeconds)
 const isRunning = ref()
 
-const isStartButtonDisabled = props.hour !== new Date().getHours()
+const isStartButtonDisabled = props.timelineItem.hour !== new Date().getHours()
 
 function start() {
   isRunning.value = setInterval(() => {
+    updateTimelineItemActivitySeconds(props.timelineItem, 1)
+
     seconds.value += 1
   }, MILLISECONDS_IN_SECONDS)
 }
@@ -42,6 +41,8 @@ function stop() {
 
 function reset() {
   stop()
+  updateTimelineItemActivitySeconds(props.timelineItem, -seconds.value)
+
   seconds.value = 0
 }
 </script>
@@ -63,7 +64,7 @@ function reset() {
       :type='BUTTON_TYPE_WARNING'
       @click='stop'
     >
-      <PauseIcon class='h-8'/>
+      <PauseIcon class='h-8' />
     </BaseButton>
     <BaseButton
       v-else

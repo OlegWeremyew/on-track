@@ -1,7 +1,8 @@
 <script setup>
 import TimelineItem from '@/components/TimelineItem/TimelineItem.vue'
 import {
-  isActivityValid, isPageValid,
+  isActivityValid,
+  isPageValid,
   isTimelineItemValid,
   validateActivities,
   validateSelectOptions,
@@ -48,7 +49,7 @@ const timelineItemRefs = ref([])
 function scrollToHour(hour = null, isSmooth = true) {
   hour ??= new Date().getHours()
 
-  const options = {behavior: isSmooth ? 'smooth' : 'instant'}
+  const options = { behavior: isSmooth ? 'smooth' : 'instant' }
 
   if (hour === MIDNIGHT_HOUR) {
     document.body.scrollIntoView(options)
@@ -79,7 +80,7 @@ watchPostEffect(async () => {
         :activities='activities'
         :activity-select-options='activitySelectOptions'
         @select-activity="emit('setTimelineItemActivity', timelineItem, $event)"
-        @scroll-to-hour="scrollToHour"
+        @scroll-to-hour='scrollToHour'
       />
     </ul>
   </div>
