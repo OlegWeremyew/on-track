@@ -10,13 +10,14 @@ import { normalizePageHash } from '@/utils/normalizePageHash'
 import { generateTimelineItems } from '@/utils/generateTimelineItems'
 import { generateActivitiesSelectOptions } from '@/utils/generateActivitiesSelectOptions'
 import { generateActivities } from '@/utils/generateActivities'
+import { generatePeriodSelectOptions } from '@/utils/generatePeriodSelectOptions'
 
 const currentPage = ref(normalizePageHash())
 const activities = ref(generateActivities())
 const timelineItems = ref(generateTimelineItems(activities))
-const activitySelectOptions = computed(() => generateActivitiesSelectOptions(activities.value))
-
 const timeline = ref()
+
+const activitySelectOptions = computed(() => generateActivitiesSelectOptions(activities.value))
 
 const goTo = (page) => {
   if (currentPage.value === PAGE_TIMELINE && page === PAGE_TIMELINE) {
@@ -45,8 +46,8 @@ function createActivity(activity) {
   activities.value.push(activity)
 }
 
-function setTimelineItemActivity(timelineItem, activity) {
-  timelineItem.activityId = activity?.id
+function setTimelineItemActivity(timelineItem, activityId) {
+  timelineItem.activityId = activityId
 }
 
 function updateTimelineItemActivitySeconds(timelineItem, activitySeconds) {
@@ -57,8 +58,14 @@ function setActivitySecondsToComplete(activity, secondsToComplete) {
   activity.secondsToComplete = secondsToComplete
 }
 
+//functions
 provide('updateTimelineItemActivitySeconds', updateTimelineItemActivitySeconds)
+provide('setTimelineItemActivity', setTimelineItemActivity)
+provide('setActivitySecondsToComplete', setActivitySecondsToComplete)
+//variables
 provide('timelineItems', timelineItems.value)
+provide('activitySelectOptions', activitySelectOptions.value)
+provide('periodSelectOptions', generatePeriodSelectOptions())
 </script>
 
 <template>
@@ -69,10 +76,7 @@ provide('timelineItems', timelineItems.value)
       v-show='currentPage === PAGE_TIMELINE'
       ref='timeline'
       :timeline-items='timelineItems'
-      :activities='activities'
-      :activity-select-options='activitySelectOptions'
       :current-page='currentPage'
-      @set-timeline-item-activity='setTimelineItemActivity'
     />
     <TheActivities
       v-show='currentPage === PAGE_ACTIVITIES'
