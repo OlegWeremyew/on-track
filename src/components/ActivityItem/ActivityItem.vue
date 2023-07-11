@@ -4,11 +4,12 @@ import { TrashIcon } from '@heroicons/vue/24/outline'
 import BaseButton from '@/components/common/BaseButton/BaseButton.vue'
 import BaseSelect from '@/components/common/BaseSelect/BaseSelect.vue'
 import { BUTTON_TYPE_DANGER } from '@/constants'
-import { isActivityValid, isUndefined } from '@/validators'
+import { isActivityValid } from '@/validators'
 import ActivitySecondsToComplete
   from '@/components/ActivityItem/ActivitySecondsToComplete/ActivitySecondsToComplete.vue'
 
 const setActivitySecondsToComplete = inject('setActivitySecondsToComplete')
+const deleteActivity = inject('deleteActivity')
 const periodSelectOptions = inject('periodSelectOptions')
 
 defineProps({
@@ -19,15 +20,11 @@ defineProps({
   },
 })
 
-const emit = defineEmits({
-  delete: isUndefined,
-})
-
 </script>
 <template>
   <li class='flex flex-col p-4 gap-2'>
     <div class='flex items-center gap-2'>
-      <BaseButton :type='BUTTON_TYPE_DANGER' @click="emit('delete')">
+      <BaseButton :type='BUTTON_TYPE_DANGER' @click="deleteActivity(activity)">
         <TrashIcon class='h-8' />
       </BaseButton>
       <span class='truncate text-xl'>{{ activity.name }}</span>
