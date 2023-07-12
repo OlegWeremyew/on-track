@@ -6,30 +6,16 @@ import TheActivities from '@/pages/TheActivities/TheActivities.vue'
 import TheProgress from '@/pages/TheProgress/TheProgress.vue'
 import { computed, provide, ref } from 'vue'
 import { PAGE_ACTIVITIES, PAGE_PROGRESS, PAGE_TIMELINE } from '@/constants'
-import { normalizePageHash } from '@/utils/normalizePageHash'
 import { generateTimelineItems } from '@/utils/generateTimelineItems'
 import { generateActivitiesSelectOptions } from '@/utils/generateActivitiesSelectOptions'
 import { generateActivities } from '@/utils/generateActivities'
 import { generatePeriodSelectOptions } from '@/utils/generatePeriodSelectOptions'
+import { navigate, currentPage, timelineRef } from './router'
 
-const currentPage = ref(normalizePageHash())
 const activities = ref(generateActivities())
 const timelineItems = ref(generateTimelineItems(activities))
-const timeline = ref()
 
 const activitySelectOptions = computed(() => generateActivitiesSelectOptions(activities.value))
-
-const goTo = (page) => {
-  if (currentPage.value === PAGE_TIMELINE && page === PAGE_TIMELINE) {
-    timeline.value.scrollToHour()
-  }
-
-  if (page !== PAGE_TIMELINE) {
-    document.body.scrollIntoView()
-  }
-
-  currentPage.value = page
-}
 
 const deleteActivity = (activity) => {
   timelineItems.value.forEach((timelineItem) => {
@@ -71,12 +57,12 @@ provide('periodSelectOptions', generatePeriodSelectOptions())
 </script>
 
 <template>
-  <TheHeader @navigate='goTo($event)' />
+  <TheHeader @navigate='navigate' />
 
   <main class='flex flex-grow flex-col'>
     <TheTimeline
       v-show='currentPage === PAGE_TIMELINE'
-      ref='timeline'
+      ref='timelineRef'
       :timeline-items='timelineItems'
       :current-page='currentPage'
     />
@@ -88,5 +74,5 @@ provide('periodSelectOptions', generatePeriodSelectOptions())
     <TheProgress v-show='currentPage === PAGE_PROGRESS' />
   </main>
 
-  <TheNav :current-page='currentPage' @navigate='goTo($event)' />
+  <TheNav :current-page='currentPage' @navigate='navigate' />
 </template>
