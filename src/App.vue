@@ -10,7 +10,7 @@ import { generateTimelineItems } from '@/utils/generateTimelineItems'
 import { generateActivitiesSelectOptions } from '@/utils/generateActivitiesSelectOptions'
 import { generateActivities } from '@/utils/generateActivities'
 import { generatePeriodSelectOptions } from '@/utils/generatePeriodSelectOptions'
-import { navigate, currentPage, timelineRef } from './router'
+import { currentPage, timelineRef } from './router'
 
 const activities = ref(generateActivities())
 const timelineItems = ref(generateTimelineItems(activities))
@@ -57,14 +57,13 @@ provide('periodSelectOptions', generatePeriodSelectOptions())
 </script>
 
 <template>
-  <TheHeader @navigate='navigate' />
+  <TheHeader />
 
   <main class='flex flex-grow flex-col'>
     <TheTimeline
       v-show='currentPage === PAGE_TIMELINE'
       ref='timelineRef'
       :timeline-items='timelineItems'
-      :current-page='currentPage'
     />
     <TheActivities
       v-show='currentPage === PAGE_ACTIVITIES'
@@ -74,5 +73,5 @@ provide('periodSelectOptions', generatePeriodSelectOptions())
     <TheProgress v-show='currentPage === PAGE_PROGRESS' />
   </main>
 
-  <TheNav :current-page='currentPage' @navigate='navigate' />
+  <TheNav />
 </template>
