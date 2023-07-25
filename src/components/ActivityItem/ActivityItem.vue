@@ -3,14 +3,15 @@ import { inject } from 'vue'
 import { TrashIcon } from '@heroicons/vue/24/outline'
 import BaseButton from '@/components/common/BaseButton/BaseButton.vue'
 import BaseSelect from '@/components/common/BaseSelect/BaseSelect.vue'
-import { BUTTON_TYPE_DANGER } from '@/constants'
-import { isActivityValid } from '@/validators'
 import ActivitySecondsToComplete
   from '@/components/ActivityItem/ActivitySecondsToComplete/ActivitySecondsToComplete.vue'
+import { isActivityValid } from '@/validators'
+import { BUTTON_TYPE_DANGER } from '@/constants'
+import { deleteActivityKey, periodSelectOptionsKey, setActivitySecondsToCompleteKey } from '@/constants/keys'
 
-const setActivitySecondsToComplete = inject('setActivitySecondsToComplete')
-const deleteActivity = inject('deleteActivity')
-const periodSelectOptions = inject('periodSelectOptions')
+const setActivitySecondsToComplete = inject(setActivitySecondsToCompleteKey)
+const deleteActivity = inject(deleteActivityKey)
+const periodSelectOptions = inject(periodSelectOptionsKey)
 
 defineProps({
   activity: {
@@ -35,7 +36,7 @@ defineProps({
         placeholder='hh:mm'
         :options='periodSelectOptions'
         :selected='activity.secondsToComplete || null'
-        @select="setActivitySecondsToComplete(activity, $event || 0)"
+        @select="setActivitySecondsToComplete(activity, $event)"
       />
       <ActivitySecondsToComplete
         v-if='activity.secondsToComplete'

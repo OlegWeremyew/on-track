@@ -4,7 +4,7 @@ import BaseButton from '@/components/common/BaseButton/BaseButton.vue'
 import { isSelectValueValid, isUndefinedOrNull, validateSelectOptions } from '@/validators'
 import { computed } from 'vue'
 import { BUTTON_TYPE_NEUTRAL } from '@/constants'
-import { normalizeSelectValue } from '@/utils/normalizeSelectValue'
+import { normalizeSelectValue } from '@/utils'
 
 const props = defineProps({
   selected: [String, Number],
