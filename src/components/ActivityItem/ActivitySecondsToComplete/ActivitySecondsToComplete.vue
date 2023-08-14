@@ -1,10 +1,8 @@
 <script setup>
-import { formatSeconds, getTotalActivitySeconds } from '@/utils'
+import { formatSeconds } from '@/utils'
 import { isActivityValid } from '@/validators'
-import { computed, inject } from 'vue'
-import { timelineItemsKey } from '@/constants/keys'
-
-const timelineItems = inject(timelineItemsKey)
+import { computed } from 'vue'
+import { getTotalActivitySeconds } from '@/activities'
 
 const props = defineProps({
   activity: {
@@ -13,7 +11,6 @@ const props = defineProps({
     validator: isActivityValid,
   },
 })
-
 
 const classes = computed(
   () =>
@@ -30,7 +27,7 @@ const sign = computed(() => (secondsDiff.value >= 0 ? '+' : '-'))
 
 const secondsDiff = computed(
   () =>
-    getTotalActivitySeconds(props.activity, timelineItems.value) - props.activity.secondsToComplete
+    getTotalActivitySeconds(props.activity) - props.activity.secondsToComplete
 )
 </script>
 

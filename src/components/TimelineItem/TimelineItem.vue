@@ -1,13 +1,9 @@
 <script setup>
 import BaseSelect from '@/components/common/BaseSelect/BaseSelect.vue'
-import { isTimelineItemValid, isUndefined, } from '@/validators'
+import { isTimelineItemValid, isUndefined } from '@/validators'
 import TimelineHour from '@/components/TimelineItem/TimelineHour/TimelineHour.vue'
 import TimelineStopwatch from '@/components/TimelineStopwatch/TimelineStopwatch.vue'
-import { inject } from 'vue'
-import { activitySelectOptionsKey, setTimelineItemActivityKey } from '@/constants/keys'
-
-const activitySelectOptions = inject(activitySelectOptionsKey)
-const setTimelineItemActivity = inject(setTimelineItemActivityKey)
+import { activitySelectOptions, updateTimelineItem } from '@/activities'
 
 defineProps({
   timelineItem: {
@@ -33,10 +29,8 @@ const emit = defineEmits({
       placeholder='Rest'
       :options='activitySelectOptions'
       :selected='timelineItem.activityId'
-      @select='setTimelineItemActivity(timelineItem, $event)'
+      @select='updateTimelineItem(timelineItem,{activityId: $event})'
     />
-    <TimelineStopwatch
-      :timeline-item='timelineItem'
-    />
+    <TimelineStopwatch :timeline-item='timelineItem' />
   </li>
 </template>

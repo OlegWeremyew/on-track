@@ -4,14 +4,13 @@ import BaseButton from '@/components/common/BaseButton/BaseButton.vue'
 import {
   BUTTON_TYPE_DANGER,
   BUTTON_TYPE_SUCCESS,
-  BUTTON_TYPE_WARNING, MILLISECONDS_IN_SECONDS,
+  BUTTON_TYPE_WARNING,
+  MILLISECONDS_IN_SECONDS,
 } from '@/constants'
 import { isTimelineItemValid } from '@/validators'
 import { formatSeconds, getCurrentHour } from '@/utils'
-import { ref, inject } from 'vue'
-import { updateTimelineItemActivitySecondsKey } from '@/constants/keys'
-
-const updateTimelineItemActivitySeconds = inject(updateTimelineItemActivitySecondsKey)
+import { ref, watch } from 'vue'
+import { updateTimelineItem } from '@/activities'
 
 const props = defineProps({
     timelineItem: {
@@ -27,9 +26,17 @@ const isRunning = ref()
 
 const isStartButtonDisabled = props.timelineItem.hour !== getCurrentHour()
 
+watch(
+  () => props.timelineItem.activityId,
+  () => updateTimelineItem(props.timelineItem, { activitySeconds: seconds.value }),
+)
+
 function start() {
   isRunning.value = setInterval(() => {
-    updateTimelineItemActivitySeconds(props.timelineItem, 1)
+    updateTimelineItem(
+      props.timelineItem,
+      { activitySeconds: props.timelineItem.activitySeconds + 1 },
+    )
 
     seconds.value += 1
   }, MILLISECONDS_IN_SECONDS)
@@ -42,7 +49,11 @@ function stop() {
 
 function reset() {
   stop()
-  updateTimelineItemActivitySeconds(props.timelineItem, -seconds.value)
+
+  updateTimelineItem(
+    props.timelineItem,
+    { activitySeconds: props.timelineItem.activitySeconds - seconds.value },
+  )
 
   seconds.value = 0
 }

@@ -15,19 +15,26 @@ const generateTimelineItems = (activities) => {
 
 export const timelineItems = ref(generateTimelineItems(activities))
 
-export function setTimelineItemActivity(timelineItem, activityId) {
-  timelineItem.activityId = activityId
-}
-
-export function updateTimelineItemActivitySeconds(timelineItem, activitySeconds) {
-  timelineItem.activitySeconds += activitySeconds
+export function updateTimelineItem(timelineItem, fields) {
+  return Object.assign(timelineItem, fields)
 }
 
 export const resetTimelineItemsActivities = (activity) => {
-  return timelineItems.value.forEach((timelineItem) => {
-    if (timelineItem.activityId === activity.id) {
-      timelineItem.activityId = null
-      timelineItem.activitySeconds = 0
-    }
-  })
+  return timelineItems.value
+    .filter((timelineItem) => hasActivity(timelineItem, activity))
+    .forEach((timelineItem) => updateTimelineItem(timelineItem, {
+      activityId: null,
+      activitySeconds: 0,
+    }))
+}
+
+export const getTotalActivitySeconds = (activity) => {
+  return timelineItems.value
+    .filter((timelineItem) => hasActivity(timelineItem, activity))
+    .reduce((totalSeconds, timelineItem) => Math.round(timelineItem.activitySeconds + totalSeconds), 0)
+}
+
+
+function hasActivity(timelineItem, activity) {
+  return timelineItem.activityId === activity.id
 }
