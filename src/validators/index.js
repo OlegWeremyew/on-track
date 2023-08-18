@@ -1,7 +1,11 @@
 import { BUTTON_TYPES, HOURS_IN_DAY, MIDNIGHT_HOUR, NAV_ITEMS } from '@/constants'
+import { ICONS } from '@/constants/icons'
 
 export const isPageValid = (page) => {
   return NAV_ITEMS.some((navItem) => navItem.page === page)
+}
+export const isIconValid = (icon) => {
+return Object.keys(ICONS).includes(icon)
 }
 
 export const isNavItemValid = (navItem) => {
@@ -72,7 +76,7 @@ const isBetween = (value, start, end) => {
   return value >= start && value <= end
 }
 
-const isString = (value) => {
+export const isString = (value) => {
   return typeof value === 'string'
 }
 

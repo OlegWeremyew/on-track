@@ -34,3 +34,7 @@ const generateActivitiesSelectOptions = (activities) => {
     value: activity.id,
   }))
 }
+
+export const trackedActivities = computed(() =>
+  activities.value.filter(({ secondsToComplete }) => secondsToComplete)
+)

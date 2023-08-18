@@ -1,6 +1,6 @@
 <script setup>
-import { ArrowPathIcon, PlayIcon, PauseIcon } from '@heroicons/vue/24/outline'
 import BaseButton from '@/components/common/BaseButton/BaseButton.vue'
+import BaseIcon from '@/components/common/BaseIcon/BaseIcon.vue'
 import {
   BUTTON_TYPE_DANGER,
   BUTTON_TYPE_SUCCESS,
@@ -11,6 +11,7 @@ import { isTimelineItemValid } from '@/validators'
 import { formatSeconds, getCurrentHour } from '@/utils'
 import { ref, watch } from 'vue'
 import { updateTimelineItem } from '@/activities'
+import { ICON_ARROW_PATH, ICON_PAUSE, ICON_PLAY } from '@/constants/icons'
 
 const props = defineProps({
     timelineItem: {
@@ -66,7 +67,7 @@ function reset() {
       :disabled='!seconds'
       @click='reset'
     >
-      <ArrowPathIcon class='h-8' />
+      <BaseIcon :name="ICON_ARROW_PATH"/>
     </BaseButton>
     <div class='flex flex-grow items-center rounded bg-gray-100 px-2 font-mono text-3xl'>
       {{ formatSeconds(seconds) }}
@@ -76,7 +77,7 @@ function reset() {
       :type='BUTTON_TYPE_WARNING'
       @click='stop'
     >
-      <PauseIcon class='h-8' />
+      <BaseIcon :name="ICON_PAUSE"/>
     </BaseButton>
     <BaseButton
       v-else
@@ -84,7 +85,7 @@ function reset() {
       :type='BUTTON_TYPE_SUCCESS'
       @click='start'
     >
-      <PlayIcon class='h-8' />
+      <BaseIcon :name="ICON_PLAY"/>
     </BaseButton>
   </div>
 </template>
