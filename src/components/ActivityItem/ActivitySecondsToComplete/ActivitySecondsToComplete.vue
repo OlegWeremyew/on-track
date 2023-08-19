@@ -2,7 +2,7 @@
 import { formatSeconds } from '@/utils'
 import { isActivityValid } from '@/validators'
 import { computed } from 'vue'
-import { getTotalActivitySeconds } from '@/activities'
+import { calculateTrackedActivitySeconds, timelineItems } from '@/activities'
 
 const props = defineProps({
   activity: {
@@ -14,7 +14,7 @@ const props = defineProps({
 
 const classes = computed(
   () =>
-    `flex items-center rounded bg-purple-100 px-2 font-mono text-xl text-purple-600 ${colorClasses.value}`
+    `flex items-center rounded px-2 font-mono text-xl ${colorClasses.value}`
 )
 
 const colorClasses = computed(() =>
@@ -27,7 +27,7 @@ const sign = computed(() => (secondsDiff.value >= 0 ? '+' : '-'))
 
 const secondsDiff = computed(
   () =>
-    getTotalActivitySeconds(props.activity) - props.activity.secondsToComplete
+    calculateTrackedActivitySeconds(timelineItems.value, props.activity) - props.activity.secondsToComplete
 )
 </script>
 

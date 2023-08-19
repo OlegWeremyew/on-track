@@ -9,6 +9,7 @@ import { BUTTON_TYPE_DANGER, PERIOD_SELECT_OPTIONS } from '@/constants'
 import {
   deleteActivity,
   resetTimelineItemsActivities,
+  timelineItems,
   updateActivity,
 } from '@/activities'
 import { ICON_TRASH } from '@/constants/icons'
@@ -22,7 +23,7 @@ defineProps({
 })
 
 const deleteAndResetActivity = (activity) => {
-  resetTimelineItemsActivities(activity)
+  resetTimelineItemsActivities(timelineItems.value ,activity)
   deleteActivity(activity)
 }
 </script>

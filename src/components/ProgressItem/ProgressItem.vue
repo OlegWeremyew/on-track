@@ -1,22 +1,42 @@
 <script setup>
-const props = defineProps(['index', 'activity'])
+import { computed } from 'vue'
+import { calculateActivityCompletionPercentage, calculateTrackedActivitySeconds, timelineItems } from '@/activities'
+import { formatSeconds, getProgressColorClass } from '@/utils'
+import { isActivityValid } from '@/validators'
 
-const color = ['red', 'yellow', 'blue', 'green'][props.index]
-const progress = [10, 50, 70, 100][props.index]
-const timeProgress = ['03:00 / 30:00', '15:00 / 30:00', '21:00 / 30:00', '30:00 / 30:00'][
-  props.index
-]
+const props = defineProps({
+  activity: {
+    type: Object,
+    required: true,
+    validator: isActivityValid,
+  },
+})
+
+const trackedActivitySeconds = computed(() => {
+  return calculateTrackedActivitySeconds(timelineItems.value, props.activity)
+})
+
+const percentage = computed(() => calculateActivityCompletionPercentage(
+  props.activity,
+  trackedActivitySeconds.value
+))
 </script>
 
 <template>
-  <li class="flex flex-col gap-1 p-4">
-    <div class="truncate text-xl">{{ activity.name }}</div>
-    <div class="flex h-5 overflow-hidden rounded bg-neutral-200">
-      <div :class="`bg-${color}-500`" :style="`width: ${progress}%`" />
+  <li class='flex flex-col gap-1 p-4'>
+    <div class='truncate text-xl'>{{ activity.name }}</div>
+    <div class='flex h-5 overflow-hidden rounded bg-neutral-200'>
+      <div :class='getProgressColorClass(percentage)' :style='`width: ${percentage}%`' />
     </div>
-    <div class="flex justify-between font-mono text-sm">
-      <span>{{ progress }}%</span>
-      <span>{{ timeProgress }}</span>
+    <div class='flex justify-between font-mono text-sm'>
+      <span>{{ percentage }}%</span>
+      <span>
+        {{
+          formatSeconds(trackedActivitySeconds)
+        }} / {{
+          formatSeconds(activity.secondsToComplete)
+        }}
+      </span>
     </div>
   </li>
 </template>

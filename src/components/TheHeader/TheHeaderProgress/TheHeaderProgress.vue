@@ -13,7 +13,7 @@ import { ICON_CHECK_CIRCLE } from '@/constants/icons'
   >
     <div v-if="false" class="flex items-center gap-1">
       Day completed!
-      <BaseIcon :name="ICON_CHECK_CIRCLE" classes="h-7 text-green-500"/>
+      <BaseIcon :name="ICON_CHECK_CIRCLE" class="h-7 text-green-500"/>
     </div>
     <div v-else class="flex items-center gap-1">
       <div>Progress: <span class="font-mono">20%</span></div>

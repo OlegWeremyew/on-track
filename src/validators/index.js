@@ -72,18 +72,18 @@ export const isNumber = (value) => {
   return typeof value === 'number'
 }
 
-const isBetween = (value, start, end) => {
-  return value >= start && value <= end
-}
-
 export const isString = (value) => {
   return typeof value === 'string'
 }
 
-const isNotEmptyString = (value) => {
-  return isString(value) && value.length > 0
-}
-
 export const isSelectValueValid = (value) => {
   return isNumberOrNull(value) || isNotEmptyString(value)
+}
+
+const isBetween = (value, start, end) => {
+  return value >= start && value <= end
+}
+
+const isNotEmptyString = (value) => {
+  return isString(value) && value.length > 0
 }

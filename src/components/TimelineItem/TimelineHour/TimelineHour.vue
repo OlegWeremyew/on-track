@@ -1,6 +1,7 @@
 <script setup>
 import { isHourValid } from '@/validators'
 import { getCurrentHour } from '@/utils'
+import { scrollToHour } from '@/activities'
 
 const props = defineProps({
   hour: {
@@ -16,12 +17,13 @@ const classes = [
     ? 'bg-purple-900 font-black text-white'
     : 'bg-gray-100 text-gray-500',
 ]
-
-
-
 </script>
 <template>
-  <a href='#' :class='classes'>
+  <a
+    href='#'
+    :class='classes'
+    @click.prevent='scrollToHour(hour)'
+  >
     {{ hour.toString().padStart(2, '0') }}:00
   </a>
 </template>

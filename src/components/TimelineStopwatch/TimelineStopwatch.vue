@@ -24,6 +24,7 @@ const props = defineProps({
 
 const seconds = ref(props.timelineItem.activitySeconds)
 const isRunning = ref()
+const temp = 120
 
 const isStartButtonDisabled = props.timelineItem.hour !== getCurrentHour()
 
@@ -36,10 +37,10 @@ function start() {
   isRunning.value = setInterval(() => {
     updateTimelineItem(
       props.timelineItem,
-      { activitySeconds: props.timelineItem.activitySeconds + 1 },
+      { activitySeconds: props.timelineItem.activitySeconds + temp },
     )
 
-    seconds.value += 1
+    seconds.value += temp
   }, MILLISECONDS_IN_SECONDS)
 }
 
