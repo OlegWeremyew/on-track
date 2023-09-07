@@ -8,3 +8,7 @@ export const formatSeconds = (seconds) => {
   const utc = data.toUTCString()
   return utc.substring(utc.indexOf(':') - 2, utc.indexOf(':') + 6)
 }
+
+export const formatSecondsWithSign = (seconds) => {
+  return `${seconds >= 0 ? '+' : '-'}${formatSeconds(seconds)}`
+}

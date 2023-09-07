@@ -2,7 +2,7 @@
 import BaseButton from '@/components/common/BaseButton/BaseButton.vue'
 import BaseSelect from '@/components/common/BaseSelect/BaseSelect.vue'
 import ActivitySecondsToComplete
-  from '@/components/ActivityItem/ActivitySecondsToComplete/ActivitySecondsToComplete.vue'
+  from '@/components/ActivityItem/RemainingActivitySeconds/RemainingActivitySeconds.vue'
 import BaseIcon from '@/components/common/BaseIcon/BaseIcon.vue'
 import { isActivityValid } from '@/validators'
 import { BUTTON_TYPE_DANGER, PERIOD_SELECT_OPTIONS } from '@/constants'
