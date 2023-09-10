@@ -18,7 +18,6 @@ const typeClasses = {
 
 <script setup>
 import { isButtonTypeValid } from '@/validators'
-import { computed } from 'vue'
 
 const props = defineProps({
   type: {
@@ -28,13 +27,14 @@ const props = defineProps({
   },
 })
 
-const classes = computed(() => {
-  return `${typeClasses[props.type]} rounded p-3 disabled:cursor-not-allowed disabled:opacity-50`
-})
+const classes = [
+  'rounded p-3 disabled:cursor-not-allowed disabled:opacity-50',
+  typeClasses[props.type]
+]
 </script>
 
 <template>
   <button :class='classes'>
-    <slot></slot>
+    <slot/>
   </button>
 </template>

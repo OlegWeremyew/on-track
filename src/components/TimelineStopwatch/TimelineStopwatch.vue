@@ -1,5 +1,5 @@
 <script setup>
-import { watch } from 'vue'
+import { watchEffect } from 'vue'
 import BaseButton from '@/components/common/BaseButton/BaseButton.vue'
 import BaseIcon from '@/components/common/BaseIcon/BaseIcon.vue'
 import {
@@ -22,34 +22,25 @@ const props = defineProps({
   },
 )
 
-const { start, stop, reset, isRunning, seconds } = useStopWatch(
-  props.timelineItem.activitySeconds,
-  updateTimeLineItemActivitySeconds,
-)
+const { start, stop, reset, isRunning, seconds } = useStopWatch(props.timelineItem.activitySeconds)
 
-watch(
-  () => props.timelineItem.activityId,
-  updateTimeLineItemActivitySeconds,
-)
-
-function updateTimeLineItemActivitySeconds() {
-  updateTimelineItem(props.timelineItem, {
+watchEffect(() => updateTimelineItem(props.timelineItem, {
     activitySeconds: seconds.value,
-  })
-}
+  }),
+)
 </script>
 
 <template>
   <div class='flex w-full gap-2 mt-2'>
     <BaseButton
       :type='BUTTON_TYPE_DANGER'
-      :disabled='!seconds'
+      :disabled='!timelineItem.activitySeconds'
       @click='reset'
     >
       <BaseIcon :name='ICON_ARROW_PATH' />
     </BaseButton>
     <div class='flex flex-grow items-center rounded bg-gray-100 px-2 font-mono text-3xl'>
-      {{ formatSeconds(seconds) }}
+      {{ formatSeconds(timelineItem.activitySeconds) }}
     </div>
     <BaseButton
       v-if='isRunning'
