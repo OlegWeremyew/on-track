@@ -11,7 +11,7 @@ import { isTimelineItemValid } from '@/validators'
 import { formatSeconds } from '@/utils'
 import { ICON_ARROW_PATH, ICON_PAUSE, ICON_PLAY } from '@/constants/icons'
 import { useStopWatch } from '@/composables'
-import { updateTimelineItem } from '@/activities'
+import { updateTimelineItem } from '@/app-activities'
 import { currentTime } from '@/time'
 
 const props = defineProps({

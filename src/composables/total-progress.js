@@ -4,7 +4,7 @@ import {
   calculateTrackedActivitySeconds,
   timelineItems,
   trackedActivities,
-} from '@/activities'
+} from '@/app-activities'
 import { getProgressColorClass } from '@/utils'
 
 export function useTotalProgress() {

@@ -3,7 +3,7 @@ import BaseButton from '@/components/common/BaseButton/BaseButton.vue'
 import BaseIcon from '@/components/common/BaseIcon/BaseIcon.vue'
 import { nextTick, ref } from 'vue'
 import { generateId } from '@/utils'
-import { createActivity } from '@/activities'
+import { createActivity } from '@/app-activities'
 import { ICON_PLUS } from '@/constants/icons'
 
 const activity = ref('')

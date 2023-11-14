@@ -11,7 +11,7 @@ import {
   resetTimelineItemsActivities,
   timelineItems,
   updateActivity,
-} from '@/activities'
+} from '@/app-activities'
 import { ICON_TRASH } from '@/constants/icons'
 
 defineProps({
