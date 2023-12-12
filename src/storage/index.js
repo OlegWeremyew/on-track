@@ -1,23 +1,43 @@
 import { APP_NAME } from '@/constants'
-import { isToday, today } from '@/time'
+import { endOfHour, isToday, today, toSeconds } from '@/time'
 import { activities, timelineItems } from '@/app-activities'
 
 export function saveState() {
   localStorage.setItem(APP_NAME, JSON.stringify({
     timelineItems: timelineItems.value,
     activities: activities.value,
-    date: today(),
+    lastActiveAt: today(),
   }))
 }
-
 
 export function loadState() {
   const serializedState = localStorage.getItem(APP_NAME)
 
   const state = serializedState ? JSON.parse(serializedState) : {}
 
-  timelineItems.value = isToday(new Date(state.date)) ?  state.timelineItems : timelineItems.value
   activities.value = state.activities || activities.value
 
+  const lastActiveAt = new Date(state.lastActiveAt)
+
+  timelineItems.value = isToday(lastActiveAt)
+    ? syncIdleSeconds(state.timelineItems, lastActiveAt)
+    : timelineItems.value
+
   return state
+}
+
+function syncIdleSeconds(timelineItems, lastActiveAt) {
+  const activeTimelineItem = timelineItems.find(({ isActive }) => isActive)
+
+  if (activeTimelineItem) {
+    activeTimelineItem.activitySeconds += calculateIdleSeconds(lastActiveAt)
+  }
+
+  return timelineItems
+}
+
+function calculateIdleSeconds(lastActiveAt) {
+  return lastActiveAt.getHours() === today().getHours()
+    ? toSeconds(today() - lastActiveAt)
+    : toSeconds(endOfHour(lastActiveAt) - lastActiveAt)
 }

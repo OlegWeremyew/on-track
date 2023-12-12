@@ -1,5 +1,5 @@
 <script setup>
-import { watchEffect } from 'vue'
+import { onMounted, watch, watchEffect } from 'vue'
 import BaseButton from '@/components/common/BaseButton/BaseButton.vue'
 import BaseIcon from '@/components/common/BaseIcon/BaseIcon.vue'
 import {
@@ -25,6 +25,12 @@ const props = defineProps({
 
 const { start, stop, reset, isRunning, seconds } = useStopWatch(props.timelineItem.activitySeconds)
 
+onMounted(() => {
+  if (props.timelineItem.isActive) {
+    start()
+  }
+})
+
 watchEffect(() => {
   if (props.timelineItem.hour !== currentTime.value.getHours() && isRunning.value) {
     stop()
@@ -35,6 +41,12 @@ watchEffect(() => updateTimelineItem(props.timelineItem, {
     activitySeconds: seconds.value,
   }),
 )
+
+watch(isRunning, () => {
+  updateTimelineItem(props.timelineItem, {
+    isActive: Boolean(isRunning.value),
+  })
+})
 </script>
 
 <template>
