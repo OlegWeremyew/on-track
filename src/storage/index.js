@@ -1,6 +1,13 @@
 import { APP_NAME } from '@/constants'
 import { endOfHour, isToday, today, toSeconds } from '@/time'
-import { activities, timelineItems } from '@/app-activities'
+import {
+  activeTimelineItem,
+  activities,
+  timelineItems,
+  startTimelineItemTimer,
+  stopTimelineItemTimer,
+  resetTimelineItems, initializeActivities,
+} from '@/app-activities'
 
 export function saveState() {
   localStorage.setItem(APP_NAME, JSON.stringify({
@@ -11,19 +18,20 @@ export function saveState() {
 }
 
 export function loadState() {
-  const serializedState = localStorage.getItem(APP_NAME)
 
-  const state = serializedState ? JSON.parse(serializedState) : {}
+  const state = loadFromLocalStorage()
 
-  activities.value = state.activities || activities.value
+  initializeActivities(state)
 
   const lastActiveAt = new Date(state.lastActiveAt)
 
-  timelineItems.value = isToday(lastActiveAt)
-    ? syncIdleSeconds(state.timelineItems, lastActiveAt)
-    : timelineItems.value
+  timelineItems.value = state.timelineItems ?? timelineItems.value
 
-  return state
+  if (activeTimelineItem.value && isToday(lastActiveAt)) {
+    timelineItems.value = syncIdleSeconds(state.timelineItems, lastActiveAt)
+  } else if (state.timelineItems && !isToday(lastActiveAt)) {
+    timelineItems.value = resetTimelineItems(state.timelineItems)
+  }
 }
 
 function syncIdleSeconds(timelineItems, lastActiveAt) {
@@ -40,4 +48,16 @@ function calculateIdleSeconds(lastActiveAt) {
   return lastActiveAt.getHours() === today().getHours()
     ? toSeconds(today() - lastActiveAt)
     : toSeconds(endOfHour(lastActiveAt) - lastActiveAt)
+}
+
+export function syncState(shouldLoad) {
+  shouldLoad ? loadState() : saveState()
+
+  if (activeTimelineItem.value) {
+    shouldLoad ? startTimelineItemTimer(activeTimelineItem.value) : stopTimelineItemTimer(activeTimelineItem.value)
+  }
+}
+
+function loadFromLocalStorage(){
+  return  JSON.parse(localStorage.getItem(APP_NAME) ?? '{}')
 }

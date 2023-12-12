@@ -1,7 +1,7 @@
 import { computed, onActivated, onDeactivated, ref, watchEffect } from 'vue'
 import {
   HUNDRED_PERCENT,
-  MILLISECONDS_IN_SECONDS,
+  MILLISECONDS_IN_SECOND,
   MINUTES_IN_HOUR,
   SECONDS_IN_DAY,
   SECONDS_IN_MINUTE,
@@ -34,7 +34,7 @@ export const useSecondsSinceMidnight = () => {
 
   // page is active
   onActivated(() => {
-    timer = setInterval(() => secondsSinceMidnight.value += 5 * 60, MILLISECONDS_IN_SECONDS)
+    timer = setInterval(() => secondsSinceMidnight.value += 5 * 60, MILLISECONDS_IN_SECOND)
 
     secondsSinceMidnight.value = calculateSecondsSinceMidnight()
   })

@@ -5,6 +5,10 @@ export const activities = ref([])
 
 export const activitySelectOptions = computed(() => generateActivitiesSelectOptions(activities.value))
 
+export function initializeActivities(state) {
+  activities.value = state.activities ?? []
+}
+
 export const deleteActivity = (activity) => {
   activities.value.splice(activities.value.indexOf(activity), 1)
 }
