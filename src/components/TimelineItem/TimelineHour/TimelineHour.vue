@@ -1,8 +1,8 @@
 <script setup>
+import { computed } from "vue"
 import { isHourValid } from "@/validators"
 import { scrollToHour } from "@/app-activities"
 import { currentTime } from "@/time"
-import { computed } from "vue"
 
 const props = defineProps({
   hour: {

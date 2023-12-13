@@ -1,10 +1,9 @@
 <script setup>
-import BaseButton from "@/components/common/BaseButton/BaseButton.vue"
-import BaseIcon from "@/components/common/BaseIcon/BaseIcon.vue"
 import { nextTick, ref } from "vue"
+import { BaseButton, BaseIcon } from "@/components/common"
 import { generateId } from "@/utils"
 import { createActivity } from "@/app-activities"
-import { ICON_PLUS } from "@/constants/icons"
+import { ICON_PLUS } from "@/constants"
 
 const activity = ref("")
 

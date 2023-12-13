@@ -1,5 +1,5 @@
 <script setup>
-import NavItem from "@/components/TheNav/NavItem/NavItem.vue"
+import { NavItem } from "@/components/TheNav/NavItem"
 import { NAV_ITEMS } from "@/constants"
 </script>
 

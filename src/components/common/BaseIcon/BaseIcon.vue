@@ -1,5 +1,5 @@
 <script setup>
-import { ICONS } from "@/constants/icons"
+import { ICONS } from "@/constants"
 import { isIconValid } from "@/validators"
 
 defineProps({

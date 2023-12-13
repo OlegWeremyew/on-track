@@ -1,8 +1,7 @@
 <script setup>
-import BaseIcon from "@/components/common/BaseIcon/BaseIcon.vue"
-import { HUNDRED_PERCENT, PAGE_PROGRESS } from "@/constants"
+import { BaseIcon } from "@/components/common"
+import { HUNDRED_PERCENT, PAGE_PROGRESS, ICON_CHECK_CIRCLE } from "@/constants"
 import { navigate } from "@/router"
-import { ICON_CHECK_CIRCLE } from "@/constants/icons"
 import { useTotalProgress } from "@/composables"
 
 const { percentage, colorClass } = useTotalProgress()

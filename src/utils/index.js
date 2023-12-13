@@ -1,4 +1,3 @@
-export * from "./getCurrentHour"
 export * from "./formatSeconds"
 export * from "./generateId"
 export * from "./generatePeriodSelectOptions"

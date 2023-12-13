@@ -1,5 +1,5 @@
 import { SECONDS_IN_MINUTE } from "@/constants"
-import { generatePeriodSelectOptionsLabel } from "@/utils/generatePeriodSelectOptionsLabel"
+import { generatePeriodSelectOptionsLabel } from "@/utils"
 
 export const generatePeriodSelectOptions = () => {
   const PERIOD_IN_MINUTES = [

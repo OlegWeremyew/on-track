@@ -1,17 +1,14 @@
 <script setup>
-import BaseButton from "@/components/common/BaseButton/BaseButton.vue"
-import BaseSelect from "@/components/common/BaseSelect/BaseSelect.vue"
-import ActivitySecondsToComplete from "@/components/ActivityItem/RemainingActivitySeconds/RemainingActivitySeconds.vue"
-import BaseIcon from "@/components/common/BaseIcon/BaseIcon.vue"
+import { BaseButton, BaseSelect, BaseIcon } from "@/components/common"
+import { RemainingActivitySeconds } from "@/components/ActivityItem/RemainingActivitySeconds"
 import { isActivityValid } from "@/validators"
-import { BUTTON_TYPE_DANGER, PERIOD_SELECT_OPTIONS } from "@/constants"
+import { BUTTON_TYPE_DANGER, PERIOD_SELECT_OPTIONS, ICON_TRASH } from "@/constants"
 import {
   deleteActivity,
   resetTimelineItemsActivities,
   timelineItems,
   updateActivity,
 } from "@/app-activities"
-import { ICON_TRASH } from "@/constants/icons"
 
 defineProps({
   activity: {
@@ -43,7 +40,7 @@ const deleteAndResetActivity = (activity) => {
         :selected="activity.secondsToComplete || null"
         @select="updateActivity(activity, { secondsToComplete: $event || 0 })"
       />
-      <ActivitySecondsToComplete v-if="activity.secondsToComplete" :activity="activity" />
+      <RemainingActivitySeconds v-if="activity.secondsToComplete" :activity="activity" />
     </div>
   </li>
 </template>

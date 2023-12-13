@@ -1,5 +1,4 @@
-import { BUTTON_TYPES, HOURS_IN_DAY, MIDNIGHT_HOUR, NAV_ITEMS } from "@/constants"
-import { ICONS } from "@/constants/icons"
+import { BUTTON_TYPES, HOURS_IN_DAY, MIDNIGHT_HOUR, NAV_ITEMS, ICONS } from "@/constants"
 
 export const isPageValid = (page) => {
   return NAV_ITEMS.some((navItem) => navItem.page === page)
@@ -24,10 +23,6 @@ export const isNumberOrNull = (value) => {
   return isNumber(value) || isNull(value)
 }
 
-export const validateTimelineItems = (timelineItems) => {
-  return timelineItems.every(isTimelineItemValid)
-}
-
 export const isTimelineItemValid = ({ hour }) => {
   return isHourValid(hour)
 }
@@ -38,10 +33,6 @@ export const validateSelectOptions = (options) => {
 
 export const isHourValid = (hour) => {
   return isNumber(hour) && isBetween(hour, MIDNIGHT_HOUR, HOURS_IN_DAY)
-}
-
-export const validateActivities = (activities) => {
-  return activities.every(isActivityValid)
 }
 
 export const isActivityValid = ({ id, name, secondsToComplete }) => {

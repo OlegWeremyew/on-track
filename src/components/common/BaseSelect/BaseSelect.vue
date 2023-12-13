@@ -1,11 +1,9 @@
 <script setup>
-import BaseButton from "@/components/common/BaseButton/BaseButton.vue"
+import { BaseButton, BaseIcon } from "@/components/common"
 import { isSelectValueValid, isUndefinedOrNull, validateSelectOptions } from "@/validators"
 import { computed } from "vue"
-import { BUTTON_TYPE_NEUTRAL } from "@/constants"
+import { BUTTON_TYPE_NEUTRAL, ICON_X_MARK } from "@/constants"
 import { normalizeSelectValue } from "@/utils"
-import BaseIcon from "@/components/common/BaseIcon/BaseIcon.vue"
-import { ICON_X_MARK } from "@/constants/icons"
 
 const props = defineProps({
   selected: [String, Number],

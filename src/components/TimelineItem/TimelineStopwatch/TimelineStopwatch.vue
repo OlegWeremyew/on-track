@@ -1,9 +1,14 @@
 <script setup>
-import BaseButton from "@/components/common/BaseButton/BaseButton.vue"
-import BaseIcon from "@/components/common/BaseIcon/BaseIcon.vue"
-import { BUTTON_TYPE_DANGER, BUTTON_TYPE_SUCCESS, BUTTON_TYPE_WARNING } from "@/constants"
+import { BaseButton, BaseIcon } from "@/components/common"
+import {
+  BUTTON_TYPE_DANGER,
+  BUTTON_TYPE_SUCCESS,
+  BUTTON_TYPE_WARNING,
+  ICON_ARROW_PATH,
+  ICON_PAUSE,
+  ICON_PLAY,
+} from "@/constants"
 import { formatSeconds } from "@/utils"
-import { ICON_ARROW_PATH, ICON_PAUSE, ICON_PLAY } from "@/constants/icons"
 import { currentTime } from "@/time"
 import {
   resetTimelineItem,
