@@ -1,24 +1,27 @@
-import { APP_NAME } from '@/constants'
-import { endOfHour, isToday, today, toSeconds } from '@/time'
+import { APP_NAME } from "@/constants"
+import { endOfHour, isToday, today, toSeconds } from "@/time"
 import {
   activeTimelineItem,
   activities,
   timelineItems,
   startTimelineItemTimer,
   stopTimelineItemTimer,
-  resetTimelineItems, initializeActivities,
-} from '@/app-activities'
+  resetTimelineItems,
+  initializeActivities,
+} from "@/app-activities"
 
 export function saveState() {
-  localStorage.setItem(APP_NAME, JSON.stringify({
-    timelineItems: timelineItems.value,
-    activities: activities.value,
-    lastActiveAt: today(),
-  }))
+  localStorage.setItem(
+    APP_NAME,
+    JSON.stringify({
+      timelineItems: timelineItems.value,
+      activities: activities.value,
+      lastActiveAt: today(),
+    }),
+  )
 }
 
 export function loadState() {
-
   const state = loadFromLocalStorage()
 
   initializeActivities(state)
@@ -54,10 +57,12 @@ export function syncState(shouldLoad) {
   shouldLoad ? loadState() : saveState()
 
   if (activeTimelineItem.value) {
-    shouldLoad ? startTimelineItemTimer(activeTimelineItem.value) : stopTimelineItemTimer(activeTimelineItem.value)
+    shouldLoad
+      ? startTimelineItemTimer(activeTimelineItem.value)
+      : stopTimelineItemTimer(activeTimelineItem.value)
   }
 }
 
-function loadFromLocalStorage(){
-  return  JSON.parse(localStorage.getItem(APP_NAME) ?? '{}')
+function loadFromLocalStorage() {
+  return JSON.parse(localStorage.getItem(APP_NAME) ?? "{}")
 }

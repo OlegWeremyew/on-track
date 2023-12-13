@@ -1,7 +1,7 @@
 <script setup>
-import {PAGE_TIMELINE} from '@/constants'
-import { currentPage, navigate } from '@/router'
-import { scrollToCurrentHour } from '@/app-activities'
+import { PAGE_TIMELINE } from "@/constants"
+import { currentPage, navigate } from "@/router"
+import { scrollToCurrentHour } from "@/app-activities"
 
 const handleClick = () => {
   currentPage.value === PAGE_TIMELINE ? scrollToCurrentHour(true) : navigate(PAGE_TIMELINE)
@@ -10,7 +10,6 @@ const handleClick = () => {
 
 <template>
   <a :href="`#${PAGE_TIMELINE}`" @click="handleClick">
-    <img src="@/assets/images/logo.png" alt="logo" title="logo" class="h-9">
+    <img src="@/assets/images/logo.png" alt="logo" title="logo" class="h-9" />
   </a>
 </template>
-

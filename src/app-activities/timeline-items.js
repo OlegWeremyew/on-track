@@ -1,22 +1,26 @@
-import { computed, ref } from 'vue'
-import { HOURS_IN_DAY, MIDNIGHT_HOUR } from '@/constants'
-import { currentTime } from '@/time'
+import { computed, ref } from "vue"
+import { HOURS_IN_DAY, MIDNIGHT_HOUR } from "@/constants"
+import { currentTime } from "@/time"
 
 export const timelineItems = ref(generateTimelineItems())
 export const timelineItemRefs = ref([])
 
-export const activeTimelineItem = computed(() => timelineItems.value.find(({ isActive }) => isActive))
+export const activeTimelineItem = computed(() =>
+  timelineItems.value.find(({ isActive }) => isActive),
+)
 
 export function updateTimelineItem(timelineItem, fields) {
   return Object.assign(timelineItem, fields)
 }
 
 export const resetTimelineItemsActivities = (timelineItems, activity) => {
-  return filterTimelineItemsByActivity(timelineItems, activity)
-    .forEach((timelineItem) => updateTimelineItem(timelineItem, {
+  return filterTimelineItemsByActivity(timelineItems, activity).forEach((timelineItem) =>
+    updateTimelineItem(timelineItem, {
       activityId: null,
-      activitySeconds: timelineItems.hour === currentTime.value.getHours() ? timelineItems.activitySeconds : 0,
-    }))
+      activitySeconds:
+        timelineItems.hour === currentTime.value.getHours() ? timelineItems.activitySeconds : 0,
+    }),
+  )
 }
 
 export const calculateTrackedActivitySeconds = (timelineItems, activity) => {
@@ -34,10 +38,11 @@ export const scrollToCurrentHour = (isSmooth = false) => {
 }
 
 export function scrollToHour(hour, isSmooth = true) {
-  const scrollElement = hour === MIDNIGHT_HOUR ? document.body : timelineItemRefs.value[hour - 1].$el
+  const scrollElement =
+    hour === MIDNIGHT_HOUR ? document.body : timelineItemRefs.value[hour - 1].$el
 
   scrollElement.scrollIntoView({
-    behavior: isSmooth ? 'smooth' : 'instant',
+    behavior: isSmooth ? "smooth" : "instant",
   })
 }
 

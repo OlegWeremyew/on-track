@@ -1,9 +1,9 @@
-import { ref } from 'vue'
-import { isPageValid } from '@/validators'
-import TheTimeline from '@/pages/TheTimeline/TheTimeline.vue'
-import TheActivities from '@/pages/TheActivities/TheActivities.vue'
-import TheProgress from '@/pages/TheProgress/TheProgress.vue'
-import { PAGE_ACTIVITIES, PAGE_PROGRESS, PAGE_TIMELINE } from '@/constants'
+import { ref } from "vue"
+import { isPageValid } from "@/validators"
+import TheTimeline from "@/pages/TheTimeline/TheTimeline.vue"
+import TheActivities from "@/pages/TheActivities/TheActivities.vue"
+import TheProgress from "@/pages/TheProgress/TheProgress.vue"
+import { PAGE_ACTIVITIES, PAGE_PROGRESS, PAGE_TIMELINE } from "@/constants"
 
 export const currentPage = ref(normalizePageHash())
 

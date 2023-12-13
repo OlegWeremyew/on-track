@@ -1,11 +1,11 @@
-import { computed, ref } from 'vue'
+import { computed, ref } from "vue"
 import {
   HUNDRED_PERCENT,
   MILLISECONDS_IN_SECOND,
   SECONDS_IN_DAY,
   SECONDS_IN_HOUR,
   SECONDS_IN_MINUTE,
-} from '@/constants'
+} from "@/constants"
 
 let currentDateTimer = null
 
@@ -35,15 +35,17 @@ const secondsSinceMidnight = computed(() => {
   return (currentTime.value - midnight.value) / MILLISECONDS_IN_SECOND
 })
 
-export const secondsSinceMidnightInPercentage = computed((() => {
+export const secondsSinceMidnightInPercentage = computed(() => {
   return (HUNDRED_PERCENT * secondsSinceMidnight.value) / SECONDS_IN_DAY
-}))
+})
 
 export function startCurrentDateTimer() {
   currentTime.value = today()
 
   currentDateTimer = setInterval(() => {
-    currentTime.value = new Date(currentTime.value.getTime() + SECONDS_IN_MINUTE * MILLISECONDS_IN_SECOND)
+    currentTime.value = new Date(
+      currentTime.value.getTime() + SECONDS_IN_MINUTE * MILLISECONDS_IN_SECOND,
+    )
   }, MILLISECONDS_IN_SECOND)
 }
 

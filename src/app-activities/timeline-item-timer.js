@@ -1,12 +1,11 @@
-import { ref, watchEffect } from 'vue'
-import { MILLISECONDS_IN_SECOND } from '@/constants'
-import { activeTimelineItem, updateTimelineItem } from '@/app-activities'
-import { currentTime } from '@/time'
+import { ref, watchEffect } from "vue"
+import { MILLISECONDS_IN_SECOND } from "@/constants"
+import { activeTimelineItem, updateTimelineItem } from "@/app-activities"
+import { currentTime } from "@/time"
 
 export const timelineItemTimer = ref(null)
 
 export function startTimelineItemTimer(timelineItem) {
-
   updateTimelineItem(timelineItem, { isActive: true })
 
   timelineItemTimer.value = setInterval(() => {

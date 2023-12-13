@@ -1,11 +1,11 @@
-import { computed, onActivated, onDeactivated, ref, watchEffect } from 'vue'
+import { computed, onActivated, onDeactivated, ref, watchEffect } from "vue"
 import {
   HUNDRED_PERCENT,
   MILLISECONDS_IN_SECOND,
   MINUTES_IN_HOUR,
   SECONDS_IN_DAY,
   SECONDS_IN_MINUTE,
-} from '@/constants'
+} from "@/constants"
 
 function calculateSecondsSinceMidnight() {
   const now = new Date()
@@ -20,9 +20,9 @@ function calculateSecondsSinceMidnight() {
 export const useSecondsSinceMidnight = () => {
   const secondsSinceMidnight = ref(calculateSecondsSinceMidnight())
 
-  const secondsSinceMidnightInPercentage = computed((() => {
+  const secondsSinceMidnightInPercentage = computed(() => {
     return (HUNDRED_PERCENT * secondsSinceMidnight.value) / SECONDS_IN_DAY
-  }))
+  })
 
   watchEffect(() => {
     if (secondsSinceMidnight.value > SECONDS_IN_DAY) {
@@ -34,15 +34,15 @@ export const useSecondsSinceMidnight = () => {
 
   // page is active
   onActivated(() => {
-    timer = setInterval(() => secondsSinceMidnight.value += 5 * 60, MILLISECONDS_IN_SECOND)
+    timer = setInterval(() => (secondsSinceMidnight.value += 5 * 60), MILLISECONDS_IN_SECOND)
 
     secondsSinceMidnight.value = calculateSecondsSinceMidnight()
   })
 
-// page is inactive
+  // page is inactive
   onDeactivated(() => clearInterval(timer))
 
   return {
-    secondsSinceMidnightInPercentage
+    secondsSinceMidnightInPercentage,
   }
 }

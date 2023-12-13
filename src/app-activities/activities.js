@@ -1,9 +1,11 @@
-import { computed, ref } from 'vue'
-import { HUNDRED_PERCENT } from '@/constants'
+import { computed, ref } from "vue"
+import { HUNDRED_PERCENT } from "@/constants"
 
 export const activities = ref([])
 
-export const activitySelectOptions = computed(() => generateActivitiesSelectOptions(activities.value))
+export const activitySelectOptions = computed(() =>
+  generateActivitiesSelectOptions(activities.value),
+)
 
 export function initializeActivities(state) {
   activities.value = state.activities ?? []
@@ -26,9 +28,7 @@ export const trackedActivities = computed(() =>
 )
 
 export function calculateActivityCompletionPercentage({ secondsToComplete }, trackedSeconds) {
-  return Math.floor(
-    (trackedSeconds * HUNDRED_PERCENT) / secondsToComplete,
-  )
+  return Math.floor((trackedSeconds * HUNDRED_PERCENT) / secondsToComplete)
 }
 
 export function calculateCompletionPercentage(totalTrackedSeconds) {

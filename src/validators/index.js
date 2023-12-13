@@ -1,11 +1,11 @@
-import { BUTTON_TYPES, HOURS_IN_DAY, MIDNIGHT_HOUR, NAV_ITEMS } from '@/constants'
-import { ICONS } from '@/constants/icons'
+import { BUTTON_TYPES, HOURS_IN_DAY, MIDNIGHT_HOUR, NAV_ITEMS } from "@/constants"
+import { ICONS } from "@/constants/icons"
 
 export const isPageValid = (page) => {
   return NAV_ITEMS.some((navItem) => navItem.page === page)
 }
 export const isIconValid = (icon) => {
-return Object.keys(ICONS).includes(icon)
+  return Object.keys(ICONS).includes(icon)
 }
 
 export const isNavItemValid = (navItem) => {
@@ -45,15 +45,9 @@ export const validateActivities = (activities) => {
 }
 
 export const isActivityValid = ({ id, name, secondsToComplete }) => {
-
   if (isNull(id)) return true
 
-  return [
-    isNotEmptyString(id),
-    isNotEmptyString(name),
-    isNumber(secondsToComplete),
-  ]
-    .every(Boolean)
+  return [isNotEmptyString(id), isNotEmptyString(name), isNumber(secondsToComplete)].every(Boolean)
 }
 
 export const isButtonTypeValid = (type) => {
@@ -69,11 +63,11 @@ export const isNull = (value) => {
 }
 
 export const isNumber = (value) => {
-  return typeof value === 'number'
+  return typeof value === "number"
 }
 
 export const isString = (value) => {
-  return typeof value === 'string'
+  return typeof value === "string"
 }
 
 export const isSelectValueValid = (value) => {
