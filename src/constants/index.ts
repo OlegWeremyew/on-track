@@ -1,13 +1,13 @@
-import { generatePeriodSelectOptions } from "@/utils"
-import { ICON_CHART_BAR, ICON_CLOCK, ICON_LIST_BULLET } from "@/constants/icons"
+import { generatePeriodSelectOptions } from '@/utils'
+import { ICON_CHART_BAR, ICON_CLOCK, ICON_LIST_BULLET } from '@/constants'
+import type { NavItemType } from '@/types'
 
-export const APP_NAME = "ontrack"
+export const LOCAL_STORAGE_KEY = 'ontrack'
+export const PAGE_TIMELINE = 'timeline'
+export const PAGE_ACTIVITIES = 'activities'
+export const PAGE_PROGRESS = 'progress'
 
-export const PAGE_TIMELINE = "timeline"
-export const PAGE_ACTIVITIES = "activities"
-export const PAGE_PROGRESS = "progress"
-
-export const NAV_ITEMS = [
+export const NAV_ITEMS: NavItemType[] = [
   {
     page: PAGE_TIMELINE,
     icon: ICON_CLOCK,
@@ -31,11 +31,11 @@ export const HOURS_IN_DAY = 24
 export const MIDNIGHT_HOUR = 0
 export const SECONDS_IN_DAY = HOURS_IN_DAY * SECONDS_IN_HOUR
 
-export const BUTTON_TYPE_PRIMARY = "primary"
-export const BUTTON_TYPE_SUCCESS = "success"
-export const BUTTON_TYPE_WARNING = "warning"
-export const BUTTON_TYPE_NEUTRAL = "neutral"
-export const BUTTON_TYPE_DANGER = "danger"
+export const BUTTON_TYPE_PRIMARY = 'primary'
+export const BUTTON_TYPE_SUCCESS = 'success'
+export const BUTTON_TYPE_WARNING = 'warning'
+export const BUTTON_TYPE_NEUTRAL = 'neutral'
+export const BUTTON_TYPE_DANGER = 'danger'
 
 export const BUTTON_TYPES = [
   BUTTON_TYPE_PRIMARY,
@@ -51,4 +51,4 @@ export const LOW_PERCENT = 33
 export const MEDIUM_PERCENT = 66
 export const HUNDRED_PERCENT = 100
 
-export * from "./icons"
+export * from './icons'

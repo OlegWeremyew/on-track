@@ -1,4 +1,4 @@
-import { APP_NAME } from "@/constants"
+import { LOCAL_STORAGE_KEY } from "@/constants"
 import { endOfHour, isToday, today, toSeconds } from "@/time"
 import {
   activeTimelineItem,
@@ -12,7 +12,7 @@ import {
 
 export function saveState() {
   localStorage.setItem(
-    APP_NAME,
+    LOCAL_STORAGE_KEY,
     JSON.stringify({
       timelineItems: timelineItems.value,
       activities: activities.value,
@@ -37,8 +37,8 @@ export function loadState() {
   }
 }
 
-function syncIdleSeconds(timelineItems, lastActiveAt) {
-  const activeTimelineItem = timelineItems.find(({ isActive }) => isActive)
+function syncIdleSeconds(timelineItems: any, lastActiveAt: Date) {
+  const activeTimelineItem = timelineItems.find(({ isActive }: {isActive: boolean}): boolean => isActive)
 
   if (activeTimelineItem) {
     activeTimelineItem.activitySeconds += calculateIdleSeconds(lastActiveAt)
@@ -47,13 +47,13 @@ function syncIdleSeconds(timelineItems, lastActiveAt) {
   return timelineItems
 }
 
-function calculateIdleSeconds(lastActiveAt) {
+function calculateIdleSeconds(lastActiveAt: Date): number {
   return lastActiveAt.getHours() === today().getHours()
-    ? toSeconds(today() - lastActiveAt)
-    : toSeconds(endOfHour(lastActiveAt) - lastActiveAt)
+    ? toSeconds(+today() - +lastActiveAt)
+    : toSeconds(+endOfHour(lastActiveAt) - +lastActiveAt)
 }
 
-export function syncState(shouldLoad) {
+export function syncState(shouldLoad: boolean) {
   shouldLoad ? loadState() : saveState()
 
   if (activeTimelineItem.value) {
@@ -64,5 +64,5 @@ export function syncState(shouldLoad) {
 }
 
 function loadFromLocalStorage() {
-  return JSON.parse(localStorage.getItem(APP_NAME) ?? "{}")
+  return JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) ?? "{}")
 }
