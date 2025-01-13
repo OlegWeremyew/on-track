@@ -15,6 +15,7 @@ export default defineConfig(({ mode }) => ({
   server: {
     port: 9000,
     open: true,
+    isStrict: true,
   },
 }));
 

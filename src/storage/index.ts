@@ -10,7 +10,7 @@ import {
   initializeActivities,
 } from "@/app-activities"
 
-export function saveState() {
+export function saveState(): void  {
   localStorage.setItem(
     LOCAL_STORAGE_KEY,
     JSON.stringify({
@@ -21,7 +21,7 @@ export function saveState() {
   )
 }
 
-export function loadState() {
+export function loadState(): void  {
   const state = loadFromLocalStorage()
 
   initializeActivities(state)
@@ -53,7 +53,7 @@ function calculateIdleSeconds(lastActiveAt: Date): number {
     : toSeconds(+endOfHour(lastActiveAt) - +lastActiveAt)
 }
 
-export function syncState(shouldLoad: boolean) {
+export function syncState(shouldLoad: boolean = false): void {
   shouldLoad ? loadState() : saveState()
 
   if (activeTimelineItem.value) {
